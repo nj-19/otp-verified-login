@@ -1,0 +1,39 @@
+<div class="jumbotron">
+  <h1>'Allo, 'Allo!</h1>
+  <p class="lead">
+    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
+    Always a pleasure scaffolding your apps.
+  </p>
+
+  <form class="form-horizontal" name="registration">
+    <div class="form-group">
+      <div class="row" ng-show="!success">
+        <label for="inputPhone" class="col-sm-3 control-label">Phone :</label>
+        <div class="col-sm-3">
+          <select class="form-control" ng-options="(x.name+'(+'+ x.callingcode+')') for x in (content |filter:removeNull) track by x.callingcode" ng-model="value"></select>
+        </div>
+        <div class="col-sm-6">
+            <input type="number" class="form-control" id="inputPhone" ng-minlength="10" ng-maxlength="10" name="phone" placeholder="Phone" ng-model="user.phone" required>
+            <span class="help-block" ng-show="registration.phone.$error.required && registration.phone.$dirty">Registered phone number is required</span>
+            <span class="help-block" ng-show="(!registration.phone.$error.required && (registration.phone.$error.minlength || registration.phone.$error.maxlength) && registration.phone.$dirty) ">phone number should be 10 digits</span><br>
+        </div>
+        <button type="button" class="btn btn-lg btn-success" ng-click="getOtp()">Get OTP</button>
+        <span us-spinner spinner-key="spinner-1"></span>
+      </div>      
+
+      <div ng-show="success">
+        <label for="inputOtp" class="col-sm-3 control-label">Enter OTP :</label>
+        <div class="col-sm-9">
+            <input type="number" class="form-control" id="inputOtp" ng-minlength="4" ng-maxlength="4" name="otp" placeholder="OTP" ng-model="user.otp" required>
+            <span class="help-block" ng-show="registration.otp.$error.required && registration.otp.$dirty">Valid OTP is required</span>
+            <span class="help-block" ng-show="(!registration.otp.$error.required && (registration.otp.$error.minlength || registration.otp.$error.maxlength) && registration.otp.$dirty) ">OTP should be 4 digits</span>
+            <span class="help-block" ng-show="wrongOtp">Please Enter valid OTP</span><br>
+            <button type="button" class="btn btn-lg btn-success" ng-disabled="!registration.$valid" ng-click="verifyOtp()" >Verify</button>
+        </div>
+      </div>
+      </div>
+    
+  </form>
+  
+
+</div>
